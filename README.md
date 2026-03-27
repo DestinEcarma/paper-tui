@@ -30,6 +30,7 @@ cargo install paper-tui
 git clone https://github.com/yourname/paper-tui.git
 cd paper-tui
 cargo build --release
+install -Dm755 target/release/paper-tui ~/.local/bin/paper-tui
 ```
 
 The compiled binary will be available at:
