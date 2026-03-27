@@ -18,16 +18,16 @@ It is designed for setups that already use terminal-native wallpaper tools such 
 
 ## Installation
 
-### From crates.io
+Install from crates.io:
 
 ```sh
 cargo install paper-tui
 ```
 
-### From source
+Build from source:
 
 ```sh
-git clone https://github.com/yourname/paper-tui.git
+git clone https://github.com/DestinEcarma/paper-tui.git
 cd paper-tui
 cargo build --release
 install -Dm755 target/release/paper-tui ~/.local/bin/paper-tui
