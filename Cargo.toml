@@ -8,6 +8,8 @@ authors = ["Destin Ecarma"]
 readme = "README.md"
 homepage = "https://github.com/DestinEcarma/paper-tui"
 repository = "https://github.com/DestinEcarma/paper-tui"
+keywords = ["ratatui", "wallpaper", "tui", "terminal", "image"]
+categories = ["command-line-utilities"]
 
 [dependencies]
 anyhow = "1.0.102"
