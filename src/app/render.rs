@@ -17,6 +17,7 @@ impl RenderExt for App<'_> {
             Constraint::Fill(1),
             Constraint::Length(1),
         ])
+        .margin(1)
         .areas(frame.area());
 
         let [search_area, menu_area] =
@@ -47,19 +48,23 @@ impl App<'_> {
     }
 
     pub fn render_search(&mut self, frame: &mut Frame, area: Rect) {
-        let focused = self.focused_block == FocusedBlock::Search;
         self.search_input
-            .set_block(self.pane_block("Search", focused));
+            .set_block(self.pane_block("Search", self.focused_block == FocusedBlock::Search));
         frame.render_widget(&self.search_input, area);
     }
 
     pub fn render_menu(&self, frame: &mut Frame, area: Rect) {
         let actions = self.menu_actions().map(|item| item.label());
+        let focused = self.focused_block == FocusedBlock::Menu;
 
         let tabs = Tabs::new(actions)
-            .block(self.pane_block("Menu", self.focused_block == FocusedBlock::Menu))
+            .block(self.pane_block("Menu", focused))
             .select(self.selected_menu)
-            .highlight_style(Style::default().fg(Color::Black).bg(Color::Green).bold());
+            .highlight_style(if focused {
+                Style::default().fg(Color::Black).bg(Color::Green).bold()
+            } else {
+                Style::default()
+            });
 
         frame.render_widget(tabs, area);
     }
@@ -173,8 +178,11 @@ impl App<'_> {
                 Span::from("l,→").bold(),
                 Span::from(" Right"),
                 Span::from(" | "),
-                Span::from("Enter,Space").bold(),
+                Span::from("󱁐,󰌑").bold(),
                 Span::from(" Activate"),
+                Span::from(" | "),
+                Span::from("Tab").bold(),
+                Span::from(" Next pane"),
             ])],
             FocusedBlock::Wallpapers => vec![Line::from(vec![
                 Span::from("h,←").bold(),
@@ -189,11 +197,14 @@ impl App<'_> {
                 Span::from("l,→").bold(),
                 Span::from(" Right"),
                 Span::from(" | "),
-                Span::from("Enter,Space").bold(),
+                Span::from("󱁐,󰌑").bold(),
                 Span::from(" Set wallpaper"),
                 Span::from(" | "),
                 Span::from("r").bold(),
                 Span::from(" Refresh"),
+                Span::from(" | "),
+                Span::from("Tab").bold(),
+                Span::from(" Next pane"),
             ])],
             FocusedBlock::Search => vec![Line::from(vec![
                 Span::from("Esc").bold(),
