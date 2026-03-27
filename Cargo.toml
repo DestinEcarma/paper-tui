@@ -3,6 +3,7 @@ name = "paper-tui"
 version = "1.0.0"
 edition = "2024"
 description = "A TUI wallpaper picker"
+license = "MIT"
 authors = ["Destin Ecarma"]
 readme = "README.md"
 homepage = "https://github.com/DestinEcarma/paper-tui"
